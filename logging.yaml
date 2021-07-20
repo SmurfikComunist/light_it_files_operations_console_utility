@@ -1,0 +1,28 @@
+version: 1
+disable_existing_loggers: False
+
+formatters:
+  complex:
+    format: '%(asctime)s - logger: %(name)s - %(levelname)s - %(pathname)s : %(lineno)d - %(message)s'
+
+  pretty:
+    format: '%(message)s'
+    datefmt: '%y%m%d %H:%M:%S'
+
+handlers:
+  file:
+    class: logging.handlers.TimedRotatingFileHandler
+    formatter: complex
+    level: WARNING
+    filename: ../logs/log
+    when: midnight
+    interval: 1
+
+  console:
+    class : logging.StreamHandler
+    formatter: pretty
+    level: INFO
+
+root:
+  level: INFO
+  handlers: [file, console]
